@@ -11,12 +11,12 @@ const Plane = ({ isRotating, ...props }) => {
     const { actions } = useAnimations(animations, ref);
     
     useEffect(() => {
-        actions["Scene"].play();
-        // if (isRotating) {
-        //     actions["Scene"].play();
-        // } else {
-        //     actions["Scene"].stop();
-        // }
+        // actions["Scene"].play();
+        if (isRotating) {
+            actions["Scene"].play();
+        } else {
+            actions["Scene"].stop();
+        }
     }, [actions, isRotating]);
     return (
         <mesh {...props} ref={ref}>
