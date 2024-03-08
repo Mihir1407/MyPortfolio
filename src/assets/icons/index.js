@@ -26,6 +26,44 @@ import arrow from './arrow.svg'
 import contact from './contact.svg'
 import soundon from './soundon.png'
 import soundoff from './soundoff.png'
+import upsidedown from './upsidedown.svg'
+import wine from './wine.svg'
+import gym from './gym.svg'
+import counterchain from './counterchain.svg'
+import mediminder from './mediminder.svg'
+import food from './food.svg'
+import child from './child.svg'
+import bank from './bank.svg'
+import mobile from './mobile.svg'
+import breakout from './breakout.svg'
+import stock from './stock.svg'
+import java from './java.svg'
+import c from './c.svg'
+import sap from './sap.svg'
+import python from './python.svg'
+import csharp from './csharp.svg'
+import cplusplus from './cplusplus.svg'
+import dotnet from './dotnet.svg'
+import php from './php.svg'
+import kotlin from './kotlin.svg'
+import jquery from './jquery.svg'
+import flask from './flask.svg'
+import mysql from './mysql.svg'
+import postgresql from './postgresql.svg'
+import firebase from './firebase.svg'
+import flutter from './flutter.svg'
+import aws from './aws.svg'
+import postman from './postman.svg'
+import linux from './linux.svg'
+import jira from './jira.svg'
+import androidstudio from './androidstudio.svg'
+import unity from './unity.svg'
+import agile from './agile.svg'
+import office from './office.svg'
+import northeastern from './northeastern.svg'
+import tcs from './tcs.svg'
+import zeus from './zeus.svg'
+import dbit from './dbit.svg'
 
 export {
     css,
@@ -55,5 +93,43 @@ export {
     arrow,
     contact,
     soundon,
-    soundoff
+    soundoff,
+    upsidedown,
+    wine,
+    gym,
+    counterchain,
+    mediminder,
+    food,
+    child,
+    bank,
+    mobile,
+    breakout,
+    stock,
+    java,
+    c,
+    sap,
+    python,
+    csharp,
+    cplusplus,
+    dotnet,
+    php,
+    kotlin,
+    jquery,
+    flask,
+    mysql,
+    postgresql,
+    firebase,
+    flutter,
+    aws,
+    postman,
+    linux,
+    jira,
+    androidstudio,
+    unity,
+    agile,
+    office,
+    northeastern,
+    tcs,
+    zeus,
+    dbit
 }

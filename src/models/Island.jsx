@@ -18,7 +18,7 @@ const Island = ({
     // const lastX = useRef(0);
     // const rotationSpeed = useRef(0);
     // const dampingFactor = 0.95;
-    const rotationSpeed = -0.004;
+    const rotationSpeed = -0.0075;
 
     // const handlePointerDown = (event) => {
     //     event.stopPropagation();

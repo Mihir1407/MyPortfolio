@@ -30,7 +30,7 @@ const renderContent = {
             btnText="Learn more" />
     ),
     3: (
-        <InfoBox text="Take a peek at how my ideas come to life, project by project"
+        <InfoBox text="Dive into my creations and witness ideas springing to life through my projects"
             link="/projects"
             btnText="Check out my portfolio" />
     ),

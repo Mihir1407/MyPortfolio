@@ -13,7 +13,7 @@ const Sky = ({isRotating}) => {
         // if (isRotating) {
         //     skyRef.current.rotation.y += 0.25 * delta;
         // }
-        skyRef.current.rotation.y += 0.25 * delta;
+        skyRef.current.rotation.y += 0.18 * delta;
     });
 
     return (
