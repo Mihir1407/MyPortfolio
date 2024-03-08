@@ -19,38 +19,37 @@ const Island = ({
     const rotationSpeed = useRef(0);
     const dampingFactor = 0.5;
     // const rotationSpeed = -0.0075;
-    const isPressed = useRef(false);  // Track if the press is active
+    const isPressed = useRef(false);
+    const isTouchDevice = 'ontouchstart' in window;
 
     const handlePointerDown = (event) => {
         event.stopPropagation();
         event.preventDefault();
-        isPressed.current = true;  // Set to true on press
-        const clientX = event.touches ? event.touches[0].clientX : event.clientX;
+        isPressed.current = true;
+        const clientX = isTouchDevice && event.touches ? event.touches[0].clientX : event.clientX;
         lastX.current = clientX;
     };
 
     const handlePointerMove = (event) => {
-        if (!isPressed.current) return;  // Ignore if not pressed
+        if (!isPressed.current && !isTouchDevice) return;
 
         event.stopPropagation();
         event.preventDefault();
 
-        const clientX = event.touches ? event.touches[0].clientX : event.clientX;
-        if (isPressed.current) {
-            const delta = (clientX - lastX.current) / viewport.width;
+        const clientX = isTouchDevice && event.touches ? event.touches[0].clientX : event.clientX;
+        const delta = (clientX - lastX.current) / viewport.width;
 
-            if (Math.abs(delta) > 0) {
-                setIsRotating(true);
-                islandRef.current.rotation.y += delta * 0.01 * Math.PI;
-                lastX.current = clientX;
-            }
+        if (isTouchDevice || Math.abs(delta) > 0) {
+            setIsRotating(true);
+            islandRef.current.rotation.y += delta * 0.01 * Math.PI;
+            lastX.current = clientX;
         }
     };
 
     const handlePointerUp = (event) => {
         event.stopPropagation();
         event.preventDefault();
-        isPressed.current = false;  // Reset on release
+        isPressed.current = false;
         setIsRotating(false);
     };
 
