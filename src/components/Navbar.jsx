@@ -5,9 +5,9 @@ const Navbar = () => {
   return (
     <header className='header'>
       <NavLink to='/' className='w-24 h-10 rounded-lg bg-white items-center justify-center flex font-bold shadow-md'>
-      <p style={{ color: '#1d5bab' }}>Go Home!</p>
+      <p style={{ color: '#1d5bab' }}>Home</p>
       </NavLink>
-      <nav className='flex text-lg gap-7 font-medium'>
+      {/* <nav className='flex text-lg gap-7 font-medium'>
         <NavLink to='/about' className={({ isActive }) => isActive ? "text-blue-500" : "text-white" }>
           About
         </NavLink>
@@ -17,7 +17,7 @@ const Navbar = () => {
         <NavLink to='/contact' className={({ isActive }) => isActive ? "text-blue-500" : "text-white"}>
           Contact Me
         </NavLink>
-      </nav>
+      </nav> */}
     </header>
   )
 }
