@@ -17,36 +17,41 @@ const Island = ({
 
     const lastX = useRef(0);
     const rotationSpeed = useRef(0);
-    const dampingFactor = 0.95;
+    const dampingFactor = 0.5;
     // const rotationSpeed = -0.0075;
+    const isPressed = useRef(false);  // Track if the press is active
 
     const handlePointerDown = (event) => {
         event.stopPropagation();
         event.preventDefault();
-        setIsRotating(true);
+        isPressed.current = true;  // Set to true on press
+        const clientX = event.touches ? event.touches[0].clientX : event.clientX;
+        lastX.current = clientX;
+    };
+
+    const handlePointerMove = (event) => {
+        if (!isPressed.current) return;  // Ignore if not pressed
+
+        event.stopPropagation();
+        event.preventDefault();
 
         const clientX = event.touches ? event.touches[0].clientX : event.clientX;
+        if (isPressed.current) {
+            const delta = (clientX - lastX.current) / viewport.width;
 
-        lastX.current = clientX;
+            if (Math.abs(delta) > 0) {
+                setIsRotating(true);
+                islandRef.current.rotation.y += delta * 0.01 * Math.PI;
+                lastX.current = clientX;
+            }
+        }
     };
 
     const handlePointerUp = (event) => {
         event.stopPropagation();
         event.preventDefault();
+        isPressed.current = false;  // Reset on release
         setIsRotating(false);
-    };
-
-    const handlePointerMove = (event) => {
-        event.stopPropagation();
-        event.preventDefault();
-        if (isRotating) {
-            const clientX = event.touches ? event.touches[0].clientX : event.clientX;
-
-            const delta = (clientX - lastX.current) / viewport.width;
-            islandRef.current.rotation.y += delta * 0.01 * Math.PI;
-            lastX.current = clientX;
-            rotationSpeed.current = delta * 0.01 * Math.PI;
-        }
     };
 
     const handleKeyDown = (event) => {
@@ -88,41 +93,41 @@ const Island = ({
         if (!isRotating) {
             // Apply damping factor
             rotationSpeed.current *= dampingFactor;
-      
+
             // Stop rotation when speed is very small
             if (Math.abs(rotationSpeed.current) < 0.001) {
-              rotationSpeed.current = 0;
+                rotationSpeed.current = 0;
             }
-      
+
             islandRef.current.rotation.y += rotationSpeed.current;
-          } else {
+        } else {
             // When rotating, determine the current stage based on island's orientation
             const rotation = islandRef.current.rotation.y;
-        // if (islandRef.current) {
-        //     // Increment the rotation on each frame
-        //     islandRef.current.rotation.y += rotationSpeed;
-        // }
-        // const rotation = islandRef.current.rotation.y;
+            // if (islandRef.current) {
+            //     // Increment the rotation on each frame
+            //     islandRef.current.rotation.y += rotationSpeed;
+            // }
+            // const rotation = islandRef.current.rotation.y;
 
-        const normalizedRotation =
-            ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+            const normalizedRotation =
+                ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
 
-        switch (true) {
-            case normalizedRotation >= 0 && normalizedRotation < Math.PI / 2: // 0 to 90 degrees
-                setCurrentStage(3);
-                break;
-            case normalizedRotation >= Math.PI / 2 && normalizedRotation < Math.PI: // 90 to 180 degrees
-                setCurrentStage(2);
-                break;
-            case normalizedRotation >= Math.PI && normalizedRotation < 3 * Math.PI / 2: // 180 to 270 degrees
-                setCurrentStage(1);
-                break;
-            case normalizedRotation >= 3 * Math.PI / 2 && normalizedRotation < 2 * Math.PI: // 270 to 360 degrees
-                setCurrentStage(4);
-                break;
-            default:
-                setCurrentStage(null); // This default case might not be needed as all possibilities are covered
-        }
+            switch (true) {
+                case normalizedRotation >= 0 && normalizedRotation < Math.PI / 2: // 0 to 90 degrees
+                    setCurrentStage(3);
+                    break;
+                case normalizedRotation >= Math.PI / 2 && normalizedRotation < Math.PI: // 90 to 180 degrees
+                    setCurrentStage(2);
+                    break;
+                case normalizedRotation >= Math.PI && normalizedRotation < 3 * Math.PI / 2: // 180 to 270 degrees
+                    setCurrentStage(1);
+                    break;
+                case normalizedRotation >= 3 * Math.PI / 2 && normalizedRotation < 2 * Math.PI: // 270 to 360 degrees
+                    setCurrentStage(4);
+                    break;
+                default:
+                    setCurrentStage(null); // This default case might not be needed as all possibilities are covered
+            }
 
         }
     });
